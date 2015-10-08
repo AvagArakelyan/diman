@@ -1,0 +1,43 @@
+{
+  "name": "diman",
+  "version": "0.1",
+  "description": "Small Dependency Injection management library",
+  "homepage": "",
+  "repository": "AvagArakelyan/diman",
+  "author": {
+    "name": "Avag Arakelyan",
+    "email": "avag89@gmail.com",
+    "url": ""
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "keywords": [
+    "dependecy",
+    "injection",
+    "di",
+    "inversion",
+    "node",
+    "ioc"
+  ],
+  "devDependencies": {
+    "babel-core": "^5.5.0",
+    "chai": "^3.3.0",
+    "gulp": "^3.6.0",
+    "gulp-coveralls": "^0.1.0",
+    "gulp-eslint": "^1.0.0",
+    "gulp-exclude-gitignore": "^1.0.0",
+    "gulp-istanbul": "^0.9.0",
+    "gulp-mocha": "^2.0.0",
+    "gulp-nsp": "^0.4.5",
+    "gulp-plumber": "^1.0.0",
+    "isparta": "^3.0.3"
+  },
+  "scripts": {
+    "prepublish": "gulp prepublish",
+    "test": "gulp"
+  },
+  "license": "MIT",
+  "dependencies": {}
+}
