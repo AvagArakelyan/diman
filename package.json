@@ -1,6 +1,6 @@
 {
   "name": "diman",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Small Dependency Injection management library",
   "homepage": "",
   "repository": "AvagArakelyan/diman",
