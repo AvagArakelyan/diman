@@ -12,6 +12,15 @@ describe('di', function () {
     });
   });
 
+  describe('Provide', function () {
+    describe('#constructor()', function () {
+      it('should accept only 1 argument', function () {
+        var inject = new di.Provide(String, Object);
+        expect(inject.injectables).to.eql([String]);
+      });
+    });
+  });
+
   describe('annotate', function () {
     describe('#constructor()', function () {
       it('should inject annotate function constructor with injectables', function () {
@@ -55,20 +64,42 @@ describe('di', function () {
         expect(injector.get(o)).to.equal(injector.get(o));
       });
 
-      it('should create instance with depencies', function () {
+      it('should create instance with dependencies', function () {
         function Service(configuration) {
           this.configuration = configuration;
         }
+        di.annotate(Service, new di.Inject(Configuration));
 
         function Configuration(){
           this.database = 'mongo';
         }
-        di.annotate(Service, new di.Inject(Configuration));
 
         var injector = new di.Injector([]);
-        var i = injector.get(Service);
-        expect(i.configuration).to.be.an.instanceof(Configuration);
-        expect(i.configuration.database).to.equal('mongo');
+        var service = injector.get(Service);
+        expect(service.configuration).to.be.an.instanceof(Configuration);
+        expect(service.configuration.database).to.equal('mongo');
+      });
+
+      it('should create instance with mocked dependencies', function () {
+        function Service(configuration) {
+          this.configuration = configuration;
+        }
+        di.annotate(Service, new di.Inject(Configuration));
+
+        function Configuration(){
+          this.database = 'mongo';
+        }
+
+        function DevConfiguration(){
+          this.database = 'dev-mongo';
+        }
+        di.annotate(DevConfiguration, new di.Provide(Configuration));
+
+
+        var injector = new di.Injector([DevConfiguration]);
+        var service = injector.get(Service);
+        expect(service.configuration).to.be.an.instanceof(DevConfiguration);
+        expect(service.configuration.database).to.equal('dev-mongo');
       });
     });
   });

@@ -11,23 +11,46 @@ $ npm install --save diman
 
 ## Usage
 
+### Simple Injection
+
 ```js
 var di = require('diman');
 
 function Service(configuration) {
   this.configuration = configuration;
 }
+di.annotate(Service, new di.Inject(Configuration));
 
 function Configuration(){
   this.database = 'mongo';
 }
 
-di.annotate(Service, new di.Inject(Configuration));
-
 var injector = new di.Injector([]);
 var service = injector.get(Service);
 console.log( service.configuration.database );   //'mongo'
+```
 
+### Mocked Injection
+
+```js
+function Service(configuration) {
+  this.configuration = configuration;
+}
+di.annotate(Service, new di.Inject(Configuration));
+
+function Configuration(){
+  this.database = 'mongo';
+}
+
+function DevConfiguration(){
+  this.database = 'dev-mongo';
+}
+di.annotate(DevConfiguration, new di.Provide(Configuration));
+
+
+var injector = new di.Injector([DevConfiguration]);
+var service = injector.get(Service);
+console.log( service.configuration.database );   //'dev-mongo'
 ```
 
 ## License
