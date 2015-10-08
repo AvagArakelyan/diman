@@ -1,6 +1,6 @@
 {
   "name": "diman",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Small Dependency Injection management library",
   "homepage": "",
   "repository": "AvagArakelyan/diman",
@@ -10,9 +10,9 @@
     "url": ""
   },
   "files": [
-    "dist"
+    "lib"
   ],
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "keywords": [
     "dependecy",
     "injection",
