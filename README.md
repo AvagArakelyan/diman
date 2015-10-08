@@ -12,9 +12,22 @@ $ npm install --save diman
 ## Usage
 
 ```js
-var diman = require('diman');
+var di = require('diman');
 
-diman('Rainbow');
+function Service(configuration) {
+  this.configuration = configuration;
+}
+
+function Configuration(){
+  this.database = 'mongo';
+}
+
+di.annotate(Service, new di.Inject(Configuration));
+
+var injector = new di.Injector([]);
+var service = injector.get(Service);
+console.log( service.configuration.database );   //'mongo'
+
 ```
 
 ## License
